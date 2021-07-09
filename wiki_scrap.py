@@ -37,13 +37,18 @@ def links_para(topic, idx) -> str:
         l = list(pattern.finditer(first_topic))[-1].span()[0]
         return first_topic[l+1:]
     else:
-        print('Index out of bound for Wiki_List')
+        print('Index out of bound for Wiki_List or the Mentioned Topic not found')
     
 
 def wiki_scrap(inittopic):
     topic = inittopic
 
-    f = open(inittopic+'.txt', 'w+')
+    try:
+        f = open(inittopic+'.txt', 'w+')
+    except Exception as e:
+        print(e)
+        return None
+        
     count = 0
     visited = []
 
@@ -74,7 +79,8 @@ def wiki_scrap(inittopic):
     f.close()
 
 if __name__ == '__main__':
-    wiki_scrap(inittopic='Osmosis');
+    tp = input('Please enter the initial topic:\n')
+    wiki_scrap(inittopic=tp)
 
 
 
